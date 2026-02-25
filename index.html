@@ -313,6 +313,36 @@ footer{background:#07080a;border-top:1px solid rgba(255,255,255,.05);padding:26p
 </head>
 <body>
 
+<!-- PASSWORD GATE -->
+<div id="pwGate" style="position:fixed;inset:0;z-index:9999;background:var(--dark);display:flex;align-items:center;justify-content:center">
+  <div style="text-align:center;max-width:360px;padding:0 24px">
+    <div style="width:48px;height:48px;border-radius:12px;background:var(--lime);display:grid;place-items:center;margin:0 auto 24px">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+    </div>
+    <div style="font-family:var(--serif);font-size:28px;color:#fff;margin-bottom:6px">ConvergeCONSUMER</div>
+    <div style="font-size:13px;color:rgba(255,255,255,.35);margin-bottom:28px">Enter password to continue</div>
+    <input id="pwInput" type="password" placeholder="Password" style="width:100%;padding:13px 18px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#fff;font-family:var(--sans);font-size:14px;outline:none;text-align:center;transition:border-color .2s" onfocus="this.style.borderColor='rgba(134,188,36,.45)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'"/>
+    <div id="pwError" style="font-size:12px;color:#f87171;margin-top:10px;opacity:0;transition:opacity .2s"></div>
+    <button id="pwBtn" onclick="checkPw()" style="margin-top:16px;width:100%;padding:13px;border-radius:999px;background:var(--lime);color:var(--ink);font-family:var(--sans);font-size:13.5px;font-weight:700;cursor:pointer;border:none;transition:opacity .15s">Enter</button>
+  </div>
+</div>
+<script>
+function checkPw(){
+  var v=document.getElementById('pwInput').value;
+  if(v==='GreenDot26'){
+    document.getElementById('pwGate').style.transition='opacity .4s';
+    document.getElementById('pwGate').style.opacity='0';
+    setTimeout(function(){document.getElementById('pwGate').style.display='none'},400);
+  } else {
+    var e=document.getElementById('pwError');
+    e.textContent='Incorrect password';e.style.opacity='1';
+    document.getElementById('pwInput').style.borderColor='rgba(248,113,113,.5)';
+    setTimeout(function(){e.style.opacity='0'},2400);
+  }
+}
+document.getElementById('pwInput').addEventListener('keydown',function(e){if(e.key==='Enter')checkPw()});
+</script>
+
 <nav id="nav">
 <div class="wrap"><div class="nav-i">
   <a class="brand" href="#top">
