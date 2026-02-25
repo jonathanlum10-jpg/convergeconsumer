@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ConvergeCONSUMER by Deloitte</title>
+<meta name="description" content="ConvergeCONSUMER is Deloitte's AI-powered decision system for consumer businesses. Data products and decision products that replace how pricing, forecasting, inventory, segmentation, and growth decisions get made across retail, grocery, CPG, restaurants, travel, and automotive."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#ffffff;--warm:#f7f5f0;--dark:#0b0c0d;--dark2:#131416;
+  --ink:#0f0f10;--ink2:#52525b;--ink3:#a1a1aa;
+  --lime:#86BC24;--lime-dim:rgba(134,188,36,.13);
+  --line:rgba(0,0,0,.08);--line-d:rgba(255,255,255,.08);
+  --serif:'Instrument Serif',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);--max:1160px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 40px}
+@media(max-width:640px){.wrap{padding:0 22px}}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:500;border-bottom:1px solid transparent;transition:background .35s,border-color .35s}
+#nav.scrolled{background:rgba(11,12,13,.92);backdrop-filter:blur(20px);border-color:var(--line-d)}
+.nav-i{height:62px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;color:#fff}
+.brand-mark{width:24px;height:24px;border-radius:7px;background:var(--lime);display:grid;place-items:center;flex-shrink:0}
+.brand-mark svg{width:13px;height:13px;fill:#fff}
+.brand-sub{font-size:10px;font-weight:500;color:rgba(255,255,255,.3);margin-left:4px;letter-spacing:.02em}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-lk{font-size:12.5px;font-weight:500;color:rgba(255,255,255,.5);padding:7px 12px;border-radius:8px;transition:color .15s,background .15s}
+.nav-lk:hover{color:#fff;background:rgba(255,255,255,.07)}
+.nav-cta{margin-left:10px;font-size:12.5px;font-weight:700;color:var(--ink);background:var(--lime);padding:9px 22px;border-radius:999px;transition:opacity .15s}
+.nav-cta:hover{opacity:.85}
+@media(max-width:720px){.nav-links .nav-lk:not(:last-child){display:none}}
+
+/* HERO */
+.hero{position:relative;background:var(--dark);overflow:hidden;padding:120px 0 0}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;opacity:.3;pointer-events:none}
+.hero-orb{position:absolute;pointer-events:none;border-radius:50%;filter:blur(90px)}
+.hero-orb-1{width:700px;height:500px;top:-150px;left:-100px;background:radial-gradient(ellipse,rgba(134,188,36,.22) 0%,transparent 65%);animation:orb1 18s ease-in-out infinite alternate}
+.hero-orb-2{width:500px;height:400px;bottom:100px;right:-80px;background:radial-gradient(ellipse,rgba(134,188,36,.14) 0%,transparent 65%);animation:orb2 22s ease-in-out infinite alternate}
+@keyframes orb1{to{transform:translate(80px,50px) scale(1.1)}}
+@keyframes orb2{to{transform:translate(-60px,-40px)}}
+.hero-grain{position:absolute;inset:0;pointer-events:none;opacity:.28;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");background-size:220px}
+.hero-vignette{position:absolute;bottom:0;left:0;right:0;height:75%;background:linear-gradient(to top,rgba(11,12,13,1) 0%,rgba(11,12,13,.7) 40%,transparent 100%);pointer-events:none}
+.hero-content{position:relative;z-index:2;width:100%}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--lime);margin-bottom:28px;opacity:0;transform:translateY(10px);transition:opacity .8s .1s,transform .8s .1s}
+.hero-eyebrow-dash{width:28px;height:1px;background:var(--lime)}
+.hero-h{font-family:var(--serif);font-size:clamp(48px,7vw,96px);line-height:1;letter-spacing:-.03em;color:#fff;margin-bottom:48px}
+.hero-h .word{display:inline-block;transform:translateY(110%);opacity:0;transition:transform .9s var(--ease),opacity .9s var(--ease)}
+.hero-h .word.in{transform:translateY(0);opacity:1}
+.hero-h em{font-style:italic;color:rgba(255,255,255,.28)}
+.hero-split{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:start}
+@media(max-width:900px){.hero-split{grid-template-columns:1fr;gap:32px}}
+.hero-split-left{display:flex;flex-direction:column}
+.hero-sub{font-size:16px;font-weight:300;line-height:1.72;color:rgba(255,255,255,.5);max-width:48ch;margin-bottom:28px;opacity:0;transform:translateY(16px);transition:opacity .9s .5s var(--ease),transform .9s .5s var(--ease)}
+.hero-sub.in{opacity:1;transform:none}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;opacity:0;transform:translateY(12px);transition:opacity .9s .7s var(--ease),transform .9s .7s var(--ease)}
+.hero-ctas.in{opacity:1;transform:none}
+.sizzle-placeholder{width:100%;background:rgba(255,255,255,.04);border:2px dashed rgba(255,255,255,.15);border-radius:18px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;transition:border-color .3s}
+.sizzle-placeholder:hover{border-color:rgba(134,188,36,.35)}
+.sizzle-placeholder-icon{width:56px;height:56px;border-radius:50%;background:rgba(134,188,36,.12);border:1px solid rgba(134,188,36,.25);display:grid;place-items:center}
+.sizzle-placeholder-icon svg{width:24px;height:24px;stroke:var(--lime);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sizzle-placeholder-label{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.hero-proof{position:relative;z-index:3;background:rgba(255,255,255,.03);border-top:1px solid rgba(255,255,255,.08);margin-top:64px;padding:36px 0 40px}
+.hero-proof-title{font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:28px}
+.hero-proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+@media(max-width:760px){.hero-proof{display:none}}
+.hero-proof-item{padding:0 24px;border-right:1px solid rgba(255,255,255,.08)}
+.hero-proof-item:first-child{padding-left:0}
+.hero-proof-item:last-child{border-right:none}
+.hero-proof-n{font-family:var(--serif);font-size:30px;line-height:1;color:var(--lime);margin-bottom:6px}
+.hero-proof-d{font-size:12px;color:rgba(255,255,255,.35);line-height:1.5}
+.btn-primary{display:inline-flex;align-items:center;gap:9px;font-size:13.5px;font-weight:700;background:var(--lime);color:var(--ink);padding:13px 26px;border-radius:999px;transition:opacity .15s,transform .15s}
+.btn-primary:hover{opacity:.88;transform:translateY(-1px)}
+.btn-ghost{font-size:13.5px;font-weight:500;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.16);padding:13px 26px;border-radius:999px;transition:all .2s}
+.btn-ghost:hover{color:#fff;border-color:rgba(255,255,255,.5)}
+
+/* DEFINITION BLOCK */
+.def-sec{background:var(--bg);border-bottom:1px solid var(--line);padding:48px 0}
+.def-inner{max-width:780px;margin:0 auto;text-align:center}
+.def-badge{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);margin-bottom:18px}
+.def-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--lime)}
+.def-text{font-family:var(--serif);font-size:clamp(20px,2.8vw,26px);line-height:1.52;letter-spacing:-.01em;color:var(--ink)}
+.def-text strong{color:var(--lime);font-weight:400}
+
+/* TRANSFORM GRID */
+.transform{padding:96px 0;background:var(--bg)}
+.section-label{font-size:9.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px}
+.transform-h{font-family:var(--serif);font-size:clamp(34px,4.5vw,58px);line-height:1.04;letter-spacing:-.025em;color:var(--ink);margin-bottom:60px}
+.transform-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+@media(max-width:900px){.transform-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:540px){.transform-grid{grid-template-columns:1fr}}
+.tf-item{padding:32px 28px;border-right:1px solid var(--line);transition:background .2s}
+.tf-item:last-child{border-right:none}
+@media(max-width:900px){.tf-item:nth-child(2n){border-right:none}.tf-item:nth-child(1),.tf-item:nth-child(2){border-bottom:1px solid var(--line)}}
+.tf-item:hover{background:var(--warm)}
+.tf-icon{width:40px;height:40px;border-radius:10px;background:var(--lime-dim);display:grid;place-items:center;margin-bottom:20px;transition:transform .2s}
+.tf-item:hover .tf-icon{transform:scale(1.08)}
+.tf-icon svg{width:20px;height:20px;stroke:var(--lime);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tf-h{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:9px;line-height:1.3}
+.tf-p{font-size:13px;color:var(--ink2);line-height:1.68}
+
+/* DATA FOUNDATION */
+.data-sec{background:var(--warm);padding:96px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.data-layout{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+@media(max-width:900px){.data-layout{grid-template-columns:1fr;gap:48px}}
+.data-h{font-family:var(--serif);font-size:clamp(34px,4.5vw,54px);line-height:1.06;letter-spacing:-.025em;color:var(--ink);margin-bottom:18px}
+.data-lead{font-size:15.5px;font-weight:300;color:var(--ink2);line-height:1.72;max-width:46ch;margin-bottom:32px}
+.data-stat-row{display:flex;gap:32px;flex-wrap:wrap;margin-bottom:28px}
+.data-stat-n{font-family:var(--serif);font-size:36px;line-height:1;color:var(--lime);margin-bottom:3px}
+.data-stat-d{font-size:11.5px;color:var(--ink3);line-height:1.4}
+.data-partner{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;font-weight:700;color:var(--ink2);padding:10px 18px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.data-partner-icon{width:18px;height:18px;flex-shrink:0}
+.data-cards{display:flex;flex-direction:column;gap:12px}
+.data-card{border:1px solid var(--line);border-radius:14px;padding:24px 26px;background:var(--bg);transition:border-color .2s,box-shadow .2s}
+.data-card:hover{border-color:rgba(134,188,36,.4);box-shadow:0 8px 32px rgba(134,188,36,.06)}
+.data-card-num{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--lime);margin-bottom:8px}
+.data-card-h{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:7px;line-height:1.3}
+.data-card-p{font-size:13px;color:var(--ink2);line-height:1.64}
+
+/* STICKY PRODUCTS */
+.products-outer{background:var(--dark);position:relative}
+.products-sticky-wrap{display:grid;grid-template-columns:1fr 1.1fr;max-width:var(--max);margin:0 auto;padding:0 40px;position:relative}
+@media(max-width:900px){.products-sticky-wrap{grid-template-columns:1fr;padding:0 22px}}
+.products-left{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:center;padding:80px 60px 80px 0;z-index:2}
+@media(max-width:900px){.products-left{position:relative;height:auto;padding:60px 0 0 0}}
+.prod-label{font-size:9.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:16px}
+.prod-nav{display:flex;flex-direction:column;gap:0;margin-top:40px}
+.prod-nav-item{display:flex;align-items:flex-start;gap:16px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.06);cursor:pointer;opacity:.35;transition:opacity .25s}
+.prod-nav-item.active{opacity:1}
+.prod-nav-item:first-child{border-top:1px solid rgba(255,255,255,.06)}
+.prod-nav-num{font-family:var(--serif);font-size:13px;color:var(--lime);flex-shrink:0;margin-top:2px;width:20px}
+.prod-nav-h{font-size:14.5px;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.3}
+.prod-nav-p{font-size:12.5px;color:rgba(255,255,255,.42);line-height:1.6;max-height:0;overflow:hidden;transition:max-height .5s var(--ease),opacity .4s;opacity:0}
+.prod-nav-item.active .prod-nav-p{max-height:200px;opacity:1}
+.products-right{padding:0}
+.prod-panel{min-height:100svh;display:flex;align-items:center;padding:80px 0 80px 48px}
+@media(max-width:900px){.prod-panel{min-height:auto;padding:32px 0 60px 0}}
+
+/* DASH */
+.dash{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:18px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.55);transition:transform .6s var(--ease)}
+.dash:hover{transform:translateY(-4px)}
+.dash-bar{padding:13px 18px;background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:8px}
+.dash-dots span{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}
+.dash-dots span:nth-child(1){background:#ff5f57}
+.dash-dots span:nth-child(2){background:#febc2e}
+.dash-dots span:nth-child(3){background:#28c840}
+.dash-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-left:4px}
+.dash-live{margin-left:auto;display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lime)}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--lime);animation:pulse-live 1.8s ease-in-out infinite}
+@keyframes pulse-live{0%,100%{opacity:1}50%{opacity:.25}}
+.dash-body{padding:20px 20px 22px}
+.chart-svg{width:100%;display:block;overflow:visible}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.bar-label{font-size:11.5px;color:rgba(255,255,255,.42);width:140px;text-align:right;flex-shrink:0}
+.bar-track{flex:1;height:7px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;background:var(--lime);width:0;transition:width 1.3s var(--ease)}
+.bar-value{font-size:12px;font-weight:700;color:var(--lime);width:52px;text-align:right;flex-shrink:0}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.07);border-radius:10px;overflow:hidden;margin-top:16px}
+.stat-cell{padding:14px 16px;background:rgba(255,255,255,.03)}
+.stat-n{font-family:var(--serif);font-size:28px;line-height:1;color:var(--lime);margin-bottom:3px}
+.stat-d{font-size:11px;color:rgba(255,255,255,.35);line-height:1.45}
+.prod-proof{display:flex;gap:28px;flex-wrap:wrap;margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08)}
+.prod-proof-n{font-family:var(--serif);font-size:34px;color:var(--lime);line-height:1;margin-bottom:2px}
+.prod-proof-d{font-size:11.5px;color:rgba(255,255,255,.35);line-height:1.4}
+.prod-link{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--lime);margin-top:14px;transition:gap .2s}
+.prod-link:hover{gap:10px}
+.prod-link svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+/* TESTIMONIALS */
+.testi-sec{background:var(--dark2);padding:100px 0;overflow:hidden;position:relative}
+.testi-sec::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(134,188,36,.1) 0%,transparent 60%);pointer-events:none}
+.testi-head{text-align:center;margin-bottom:72px;position:relative;z-index:2}
+.testi-h{font-family:var(--serif);font-size:clamp(28px,3.8vw,48px);line-height:1.05;letter-spacing:-.022em;color:#fff}
+.testi-note{font-size:11px;color:rgba(255,255,255,.25);margin-top:10px;font-style:italic}
+.testi-scroll{display:flex;gap:24px;overflow:hidden;position:relative;z-index:2;-webkit-mask-image:linear-gradient(to right,transparent,black 5%,black 95%,transparent)}
+.testi-track{display:flex;gap:24px;animation:testi-scroll 42s linear infinite;flex-shrink:0}
+@keyframes testi-scroll{to{transform:translateX(-50%)}}
+.testi-card{flex-shrink:0;width:440px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:36px 36px 30px;transition:border-color .3s}
+.testi-card:hover{border-color:rgba(134,188,36,.3)}
+.testi-open-quote{font-family:var(--serif);font-size:80px;line-height:.75;color:var(--lime);opacity:.45;display:block;font-style:normal;margin-bottom:6px}
+.testi-q{font-family:var(--serif);font-size:18px;font-style:italic;line-height:1.58;color:rgba(255,255,255,.88);margin-bottom:24px}
+.testi-divider{width:32px;height:1px;background:rgba(134,188,36,.4);margin-bottom:16px}
+.testi-company{font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lime);margin-bottom:5px}
+.testi-who{font-size:13px;font-weight:500;color:rgba(255,255,255,.5)}
+.testi-stat{margin-top:14px;display:inline-block;font-size:11px;font-weight:700;padding:5px 11px;background:rgba(134,188,36,.1);border:1px solid rgba(134,188,36,.2);color:var(--lime);border-radius:999px;letter-spacing:.04em}
+
+/* GUIDE */
+.guide-sec{background:var(--dark);padding:100px 0;position:relative;overflow:hidden}
+.guide-glow{position:absolute;top:-180px;right:-180px;width:700px;height:700px;background:radial-gradient(ellipse,rgba(134,188,36,.13) 0%,transparent 58%);filter:blur(40px);pointer-events:none}
+.guide-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:36px;align-items:start;position:relative;z-index:2}
+@media(max-width:900px){.guide-grid{grid-template-columns:1fr}}
+.guide-prompts{display:flex;flex-direction:column;gap:2px;margin-top:36px}
+.guide-prompt-lbl{font-size:9.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:9px}
+.gp{text-align:left;padding:13px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.07);font-size:13px;color:rgba(255,255,255,.48);display:flex;align-items:flex-start;gap:10px;transition:all .2s;cursor:pointer;line-height:1.5;background:transparent}
+.gp:hover,.gp.on{background:rgba(134,188,36,.07);border-color:rgba(134,188,36,.28);color:rgba(255,255,255,.9)}
+.gp-icon{flex-shrink:0;font-size:14px;margin-top:1px}
+.guide-panel{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:20px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.5)}
+.gp-bar{background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.08);padding:13px 20px;display:flex;align-items:center;gap:9px}
+.gp-bar-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.gp-scroll{padding:20px;min-height:340px;max-height:400px;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
+.gp-scroll::-webkit-scrollbar{width:2px}
+.gp-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08)}
+.gp-input-row{border-top:1px solid rgba(255,255,255,.07);padding:12px 18px;display:flex;gap:9px;align-items:center}
+.gp-input{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:9px 16px;font-size:13px;color:rgba(255,255,255,.8);font-family:var(--sans);outline:none;transition:border-color .2s}
+.gp-input::placeholder{color:rgba(255,255,255,.25)}
+.gp-input:focus{border-color:rgba(134,188,36,.45)}
+.gp-send{width:34px;height:34px;border-radius:50%;background:var(--lime);display:grid;place-items:center;cursor:pointer;flex-shrink:0;transition:opacity .15s}
+.gp-send:hover{opacity:.82}
+.gp-send svg{width:13px;height:13px;stroke:#111;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.msg-row{display:flex;flex-direction:column;gap:4px}
+.msg-row.right{align-items:flex-end}
+.msg-who{font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.msg-bubble{padding:10px 14px;border-radius:13px;font-size:13px;line-height:1.58;max-width:88%}
+.msg-user{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.85)}
+.msg-agent{background:rgba(134,188,36,.11);border:1px solid rgba(134,188,36,.22);color:rgba(255,255,255,.9)}
+.msg-agent strong{color:var(--lime)}
+.typing{display:flex;align-items:center;gap:4px;padding:11px 14px;background:rgba(134,188,36,.08);border:1px solid rgba(134,188,36,.18);border-radius:13px;width:fit-content}
+.typing span{width:5px;height:5px;border-radius:50%;background:var(--lime);animation:blink 1.3s ease-in-out infinite;display:block}
+.typing span:nth-child(2){animation-delay:.22s}
+.typing span:nth-child(3){animation-delay:.44s}
+@keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
+
+/* INDUSTRIES */
+.ind-sec{background:var(--warm);padding:88px 0}
+.ind-layout{display:grid;grid-template-columns:1fr 1.5fr;gap:80px;align-items:start}
+@media(max-width:900px){.ind-layout{grid-template-columns:1fr}}
+.ind-group-label{font-size:9.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.ind-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px}
+.ind-chip{font-size:12.5px;font-weight:600;padding:8px 15px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink2);cursor:pointer;transition:all .18s}
+.ind-chip.on{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+.ind-chip:hover:not(.on){border-color:var(--ink2);color:var(--ink)}
+.ind-divider{height:1px;background:var(--line);margin:20px 0}
+.ind-reco-label{font-size:9.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px}
+.ind-rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:500px){.ind-rec-grid{grid-template-columns:1fr}}
+.ind-box{border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--bg)}
+.ind-box-h{font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:11px}
+.ind-list{list-style:none}
+.ind-list li{font-size:13px;color:var(--ink2);line-height:1.5;padding:5px 0;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:7px}
+.ind-list li:last-child{border-bottom:none}
+.ind-list li::before{content:'\2192';color:var(--lime);font-size:10px;flex-shrink:0}
+.ind-rec-link{margin-top:14px;display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--lime);transition:gap .2s}
+.ind-rec-link:hover{gap:10px}
+.ind-proof-strip{margin-top:16px;padding:14px 18px;border:1px solid var(--line);border-radius:10px;background:var(--bg);display:flex;gap:28px;flex-wrap:wrap;align-items:center}
+.ind-proof-item{display:flex;flex-direction:column;gap:1px}
+.ind-proof-n{font-family:var(--serif);font-size:22px;line-height:1;color:var(--lime)}
+.ind-proof-d{font-size:10.5px;color:var(--ink3);line-height:1.4}
+
+/* CASES */
+.cases-sec{background:var(--bg);padding:88px 0}
+.cases-wrap{margin-top:44px;border:1px solid var(--line);border-radius:14px;overflow:hidden;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th{font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);padding:13px 20px;text-align:left;background:var(--warm);border-bottom:1px solid var(--line)}
+td{padding:17px 20px;font-size:13px;color:var(--ink2);border-bottom:1px solid var(--line);vertical-align:top;line-height:1.6}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--warm)}
+.td-prod{font-size:12px;font-weight:700;color:var(--ink)}
+.td-check{color:var(--lime);margin-right:3px;font-weight:900}
+.td-tag{display:inline-block;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--lime-dim);color:var(--lime);letter-spacing:.04em}
+
+/* TRUST */
+.trust-sec{background:var(--warm);border-top:1px solid var(--line);padding:52px 0}
+.trust-label{text-align:center;font-size:9.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);margin-bottom:22px}
+.trust-row{display:flex;flex-direction:column;gap:14px;align-items:center}
+.trust-primary{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.trust-badge-lg{font-size:12.5px;font-weight:700;padding:11px 22px;border:1.5px solid rgba(134,188,36,.35);border-radius:10px;background:rgba(134,188,36,.06);color:var(--ink);display:flex;align-items:center;gap:8px;transition:border-color .15s}
+.trust-badge-lg:hover{border-color:var(--lime)}
+.trust-badge-lg svg{width:16px;height:16px;flex-shrink:0}
+.trust-secondary{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.trust-badge{font-size:11.5px;font-weight:700;padding:9px 18px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink2);transition:border-color .15s}
+.trust-badge:hover{border-color:var(--ink3)}
+
+/* CTA */
+.cta-sec{background:var(--dark);padding:110px 0;text-align:center;position:relative;overflow:hidden}
+.cta-glow{position:absolute;bottom:-300px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(134,188,36,.18) 0%,transparent 60%);filter:blur(60px);pointer-events:none}
+.cta-inner{position:relative;z-index:2}
+.cta-h{font-family:var(--serif);font-size:clamp(40px,6vw,82px);line-height:1.02;letter-spacing:-.03em;color:#fff;margin-bottom:20px}
+.cta-h em{font-style:italic;color:rgba(255,255,255,.28)}
+.cta-p{font-size:16.5px;font-weight:300;color:rgba(255,255,255,.45);max-width:44ch;margin:0 auto 42px;line-height:1.72}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:72px}
+.cta-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07);border-radius:16px;overflow:hidden;max-width:880px;margin:0 auto;text-align:left}
+@media(max-width:640px){.cta-cards{grid-template-columns:1fr}}
+.cta-card{background:rgba(255,255,255,.02);padding:32px 28px;transition:background .2s}
+.cta-card:hover{background:rgba(255,255,255,.05)}
+.cta-card-num{font-family:var(--serif);font-size:40px;font-style:italic;color:rgba(255,255,255,.06);line-height:1;margin-bottom:14px}
+.cta-card-h{font-size:16px;font-weight:700;color:#fff;margin-bottom:8px}
+.cta-card-p{font-size:13px;color:rgba(255,255,255,.4);line-height:1.64;margin-bottom:16px}
+.cta-card-link{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:700;color:var(--lime);transition:gap .2s}
+.cta-card-link:hover{gap:9px}
+
+/* FOOTER */
+footer{background:#07080a;border-top:1px solid rgba(255,255,255,.05);padding:26px 0}
+.footer-i{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.foot-brand{font-size:12px;font-weight:700;color:rgba(255,255,255,.25)}
+.foot-links{display:flex;gap:18px}
+.foot-link{font-size:12px;color:rgba(255,255,255,.2);transition:color .15s;cursor:pointer;font-family:var(--sans)}
+.foot-link:hover{color:rgba(255,255,255,.5)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+<div class="wrap"><div class="nav-i">
+  <a class="brand" href="#top">
+    <div class="brand-mark"><svg viewBox="0 0 14 14"><path d="M2 12 L7 2 L12 12 M4 8.5 L10 8.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></div>
+    ConvergeCONSUMER
+    <span class="brand-sub">Part of Deloitte's Converge platform</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-lk" href="#guide">Converge Guide</a>
+    <a class="nav-lk" href="#data">Data Foundation</a>
+    <a class="nav-lk" href="#products">Products</a>
+    <a class="nav-lk" href="#industries">Industries</a>
+    <a class="nav-lk" href="#cases">Cases</a>
+    <a class="nav-cta" href="#cta">Talk to our team</a>
+  </div>
+</div></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-vignette"></div>
+  <div class="wrap hero-content">
+    <div class="hero-eyebrow" id="heroEyebrow"><span class="hero-eyebrow-dash"></span>ConvergeCONSUMER by Deloitte</div>
+    <h1 class="hero-h" id="heroH" aria-label="Make decisions like you already know.">
+      <span class="word">Make</span>&nbsp;<span class="word" style="transition-delay:.08s">decisions</span>&nbsp;<span class="word" style="transition-delay:.16s">like</span>&nbsp;<span class="word" style="transition-delay:.22s">you</span>&nbsp;<em class="word" style="transition-delay:.3s">already</em>&nbsp;<em class="word" style="transition-delay:.38s">know.</em>
+    </h1>
+    <div class="hero-split">
+      <div class="hero-split-left">
+        <p class="hero-sub" id="heroSub">Agentic AI and proprietary external signals replace how your organization makes pricing, forecasting, inventory, segmentation, and growth decisions. Configured to your data. In production in weeks.</p>
+        <div class="hero-ctas" id="heroCtas">
+          <a class="btn-primary" href="#guide">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4m0 4h.01"/></svg>
+            Ask the Converge Guide
+          </a>
+          <a class="btn-ghost" href="#products">Explore products</a>
+        </div>
+      </div>
+      <div class="hero-split-right">
+        <div class="sizzle-placeholder">
+          <div class="sizzle-placeholder-icon"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+          <div class="sizzle-placeholder-label">Sizzle Reel Placeholder</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-proof" id="heroStrip">
+    <div class="wrap">
+      <div class="hero-proof-title">Verified client outcomes</div>
+      <div class="hero-proof-grid">
+        <div class="hero-proof-item"><div class="hero-proof-n" data-count="640" data-prefix="$" data-suffix="M+">$0M+</div><div class="hero-proof-d">in hidden growth identified from existing customers (US retail)</div></div>
+        <div class="hero-proof-item"><div class="hero-proof-n">81&ndash;93%</div><div class="hero-proof-d">long-range forecast accuracy where prior models delivered under 70%</div></div>
+        <div class="hero-proof-item"><div class="hero-proof-n">250&ndash;450<small style="font-size:.5em">bps</small></div><div class="hero-proof-d">incremental bottom-line revenue from AI-optimized pricing across 1,400+ locations</div></div>
+        <div class="hero-proof-item"><div class="hero-proof-n" data-count="75" data-suffix="%">0%</div><div class="hero-proof-d">reduction in the time it takes planners to align on a single demand number</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CANONICAL DEFINITION -->
+<section class="def-sec">
+<div class="wrap">
+  <div class="def-inner rv">
+    <div class="def-badge"><span class="def-badge-dot"></span>What is ConvergeCONSUMER?</div>
+    <p class="def-text">ConvergeCONSUMER is Deloitte's AI-powered decision system for consumer businesses. It uses agentic AI and proprietary external data to replace how organizations make pricing, forecasting, inventory, segmentation, and growth decisions: across <strong>retail</strong>, <strong>grocery</strong>, <strong>CPG</strong>, <strong>restaurants</strong>, <strong>travel</strong>, and <strong>automotive</strong>. Each product is built around a specific business decision, with sector logic, external signals, and decision intelligence already encoded, then configured to your data and deployed in weeks.</p>
+  </div>
+</div>
+</section>
+
+<!-- CONVERGE GUIDE -->
+<section class="guide-sec" id="guide">
+<div class="guide-glow"></div>
+<div class="wrap">
+  <div class="rv">
+    <div class="section-label" style="color:rgba(255,255,255,.3)">Converge Guide</div>
+    <h2 style="font-family:var(--serif);font-size:clamp(34px,4.2vw,58px);line-height:1.04;letter-spacing:-.025em;color:#fff;margin-bottom:14px">Ask about any decision.<br/>Get the right product,<br/>proof, and next step.<br/><em style="color:rgba(255,255,255,.25)">Instantly.</em></h2>
+    <p style="font-size:15px;font-weight:300;color:rgba(255,255,255,.42);max-width:50ch;line-height:1.72">Type a real business question. The Guide shows what a ConvergeCONSUMER output looks like: a recommendation, a confidence range, the trade-offs. Illustrative outputs only, no client data.</p>
+  </div>
+  <div class="guide-grid rv rv-d2">
+    <div>
+      <div class="guide-prompts">
+        <div class="guide-prompt-lbl">Try asking...</div>
+        <button class="gp on" data-q="grocery" onclick="guideClick(this)"><span class="gp-icon">&#x1F6D2;</span>What decisions does ConvergeCONSUMER make for grocery operators?</button>
+        <button class="gp" data-q="pricing" onclick="guideClick(this)"><span class="gp-icon">&#x1F4CA;</span>Show me pricing and promotion proof points.</button>
+        <button class="gp" data-q="data" onclick="guideClick(this)"><span class="gp-icon">&#x1F517;</span>What data products power segmentation?</button>
+        <button class="gp" data-q="internal" onclick="guideClick(this)"><span class="gp-icon">&#x26A1;</span>How is this different from building internally?</button>
+        <button class="gp" data-q="agentic" onclick="guideClick(this)"><span class="gp-icon">&#x1F916;</span>What does agentic AI mean in this context?</button>
+        <button class="gp" data-q="speed" onclick="guideClick(this)"><span class="gp-icon">&#x1F680;</span>How quickly can we go to production?</button>
+      </div>
+    </div>
+    <div class="guide-panel">
+      <div class="gp-bar">
+        <div style="display:flex;gap:4px;margin-right:4px"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff5f57"></span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#febc2e"></span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#28c840"></span></div>
+        <div class="gp-bar-title">Converge Guide</div>
+        <div class="dash-live" style="margin-left:auto"><span class="live-dot"></span>Live</div>
+      </div>
+      <div class="gp-scroll" id="guideChat"></div>
+      <div class="gp-input-row">
+        <input class="gp-input" id="gcInput" placeholder="Ask about any product, decision, or proof point..."/>
+        <div class="gp-send" onclick="guideSend()"><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4z"/></svg></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- WHAT IT DOES -->
+<section class="transform">
+<div class="wrap">
+  <div class="rv"><div class="section-label">What it does</div><h2 class="transform-h">From signals to decisions.<br/>Not reports.</h2></div>
+  <div class="transform-grid rv rv-d1">
+    <div class="tf-item"><div class="tf-icon"><svg viewBox="0 0 24 24"><path d="M12 20V10M17 20V4M7 20v-4"/></svg></div><div class="tf-h">Recommendations, not dashboards</div><div class="tf-p">Each product completes the decision: a recommended action, the confidence level, and the trade-offs. Not a chart you interpret yourself.</div></div>
+    <div class="tf-item"><div class="tf-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/></svg></div><div class="tf-h">Sector logic, pre-encoded</div><div class="tf-p">Deloitte's decision logic from active work inside retail, grocery, CPG, restaurants, and travel is already built in. You configure it to your data. You don't train it from scratch.</div></div>
+    <div class="tf-item"><div class="tf-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div><div class="tf-h">External signals your models lack</div><div class="tf-p">Consumer behavior indices, competitive pricing movements, elasticity models, weather, regional demand shifts: sourced and maintained by Deloitte, paired with your first-party data.</div></div>
+    <div class="tf-item"><div class="tf-icon"><svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div><div class="tf-h">In production in weeks</div><div class="tf-p">Modular products, governed deployment, integrated change management. Most clients are making decisions within weeks of start: not running pilots.</div></div>
+  </div>
+</div>
+</section>
+
+<!-- DATA FOUNDATION -->
+<section class="data-sec" id="data">
+<div class="wrap">
+  <div class="data-layout">
+    <div class="rv">
+      <div class="section-label">Data foundation</div>
+      <h2 class="data-h">The reason the decision products work.</h2>
+      <p class="data-lead">Decision products are only as good as what feeds them. ConvergeCONSUMER is built on a proprietary data foundation that pairs curated external signals with your first-party data to power every recommendation.</p>
+      <div class="data-stat-row">
+        <div><div class="data-stat-n">1M+</div><div class="data-stat-d">curated data features</div></div>
+        <div><div class="data-stat-n">Daily</div><div class="data-stat-d">automated signal refresh</div></div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <div class="data-partner">
+          <svg class="data-partner-icon" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V6l-8-4z" stroke="var(--lime)" stroke-width="1.5"/></svg>
+          Built on Google Cloud
+        </div>
+        <div class="data-partner">
+          <svg class="data-partner-icon" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="var(--lime)" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Vertex AI &middot; BigQuery &middot; Cortex
+        </div>
+      </div>
+    </div>
+    <div class="data-cards rv rv-d1">
+      <div class="data-card">
+        <div class="data-card-num">Data Product 01</div>
+        <div class="data-card-h">Signals</div>
+        <div class="data-card-p">Thousands of consumer-level behavioral features and predictions your first-party data doesn't have. Demand shifts, competitive moves, regional elasticity, sentiment, and spend propensity: sourced externally, updated continuously.</div>
+      </div>
+      <div class="data-card">
+        <div class="data-card-num">Data Product 02</div>
+        <div class="data-card-h">Customer Identity Resolution</div>
+        <div class="data-card-p">Unifies fragmented customer identities across POS, e-commerce, loyalty, and CRM into persistent unified profiles. One customer, one record, regardless of how many systems they appear in.</div>
+      </div>
+      <div class="data-card">
+        <div class="data-card-num">Data Product 03</div>
+        <div class="data-card-h">Customer Identity Enhancement</div>
+        <div class="data-card-p">Appends Signals data to your resolved customer records, giving each profile a richer behavioral and predictive layer. Segments built on who customers actually are and what they will do next.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- PRODUCTS STICKY SCROLL -->
+<section class="products-outer" id="products">
+<div class="products-sticky-wrap">
+  <div class="products-left">
+    <div class="prod-label">Decision products</div>
+    <h2 style="font-family:var(--serif);font-size:clamp(30px,3.5vw,46px);line-height:1.06;letter-spacing:-.022em;color:#fff">Built for the decisions<br/>that move the P&amp;L.</h2>
+    <nav class="prod-nav" id="prodNav">
+      <div class="prod-nav-item active" data-panel="0"><span class="prod-nav-num">01</span><div><div class="prod-nav-h">Forecasting</div><div class="prod-nav-p">One number everyone trusts. High-accuracy, explainable demand forecasts at scale: feeding planning, revenue, inventory, and labor.</div></div></div>
+      <div class="prod-nav-item" data-panel="1"><span class="prod-nav-num">02</span><div><div class="prod-nav-h">Price &amp; Promo Optimization</div><div class="prod-nav-p">Every price, every zone, optimized. 30+ scenarios evaluated before every commitment. Runs continuously, not once.</div></div></div>
+      <div class="prod-nav-item" data-panel="2"><span class="prod-nav-num">03</span><div><div class="prod-nav-h">Customer Segmentation</div><div class="prod-nav-p">$640M was already in your data. Segments built on who customers actually are and what they will do next.</div></div></div>
+      <div class="prod-nav-item" data-panel="3"><span class="prod-nav-num">04</span><div><div class="prod-nav-h">Inventory &amp; Labor Optimization</div><div class="prod-nav-p">Demand-supply alignment at full network scale. Forecast-driven, not reactive. Connects directly to the decisions upstream.</div></div></div>
+      <div class="prod-nav-item" data-panel="4"><span class="prod-nav-num">05</span><div><div class="prod-nav-h">Opportunities &amp; Risks</div><div class="prod-nav-p">AI-surfaced headwinds and tailwinds mapped to specific business scenarios. The strategic signals before they move markets.</div></div></div>
+    </nav>
+  </div>
+  <div class="products-right">
+
+    <!-- Panel 0: Forecasting -->
+    <div class="prod-panel" data-panel="0">
+      <div style="width:100%">
+        <div class="dash" id="dashForecast">
+          <div class="dash-bar"><div class="dash-dots"><span></span><span></span><span></span></div><div class="dash-title">Demand Forecast &middot; Apparel</div><div class="dash-live"><span class="live-dot"></span>Live</div></div>
+          <div class="dash-body">
+            <svg class="chart-svg" viewBox="0 0 480 130" style="margin-bottom:14px">
+              <defs><linearGradient id="gf" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#86BC24" stop-opacity=".5"/><stop offset="100%" stop-color="#86BC24" stop-opacity="0"/></linearGradient></defs>
+              <line x1="0" y1="32" x2="480" y2="32" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+              <line x1="0" y1="64" x2="480" y2="64" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+              <line x1="0" y1="96" x2="480" y2="96" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+              <path id="f-fill" d="" fill="url(#gf)" opacity=".22"/>
+              <path id="f-line" d="" stroke="#86BC24" stroke-width="2.2" fill="none"/>
+              <path id="f-band" d="" fill="rgba(134,188,36,.06)" opacity="0"/>
+              <path id="f-pred" d="" stroke="rgba(255,255,255,.38)" stroke-width="1.5" stroke-dasharray="5,4" fill="none" opacity="0"/>
+              <text x="4" y="125" fill="rgba(255,255,255,.22)" font-size="9" font-family="DM Sans">Jan</text>
+              <text x="84" y="125" fill="rgba(255,255,255,.22)" font-size="9" font-family="DM Sans">Mar</text>
+              <text x="164" y="125" fill="rgba(255,255,255,.22)" font-size="9" font-family="DM Sans">May</text>
+              <text x="244" y="125" fill="rgba(255,255,255,.22)" font-size="9" font-family="DM Sans">Jul</text>
+              <text x="324" y="125" fill="rgba(255,255,255,.22)" font-size="9" font-family="DM Sans">Sep</text>
+              <text x="388" y="125" fill="rgba(134,188,36,.55)" font-size="9" font-family="DM Sans" font-weight="700">Forecast &#8594;</text>
+            </svg>
+            <div class="stat-grid">
+              <div class="stat-cell"><div class="stat-n" data-count="87" data-suffix="%">0%</div><div class="stat-d">forecast accuracy</div></div>
+              <div class="stat-cell"><div class="stat-n" data-count="81" data-suffix="%">0%</div><div class="stat-d">planner adoption</div></div>
+              <div class="stat-cell"><div class="stat-n">+17%</div><div class="stat-d">vs prior benchmark</div></div>
+              <div class="stat-cell"><div class="stat-n">&darr;75%</div><div class="stat-d">alignment time</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="prod-proof"><div><div class="prod-proof-n">81&ndash;93%</div><div class="prod-proof-d">long-range accuracy</div></div><div><div class="prod-proof-n">75%</div><div class="prod-proof-d">alignment time reduction</div></div></div>
+        <a class="prod-link" href="#cases">See the case <svg viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
+      </div>
+    </div>
+
+    <!-- Panel 1: Price & Promo -->
+    <div class="prod-panel" data-panel="1">
+      <div style="width:100%">
+        <div class="dash">
+          <div class="dash-bar"><div class="dash-dots"><span></span><span></span><span></span></div><div class="dash-title">Price Optimization &middot; Restaurant Network</div></div>
+          <div class="dash-body">
+            <div style="margin-bottom:14px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.28)">Scenario simulation: 30+ evaluated</div>
+            <div id="priceChart">
+              <div class="bar-row"><span class="bar-label">Hold all prices</span><div class="bar-track"><div class="bar-fill" data-w="22"></div></div><span class="bar-value" style="color:rgba(255,255,255,.35)">+0.4%</span></div>
+              <div class="bar-row"><span class="bar-label">Zone pricing</span><div class="bar-track"><div class="bar-fill" data-w="52"></div></div><span class="bar-value">+1.3%</span></div>
+              <div class="bar-row"><span class="bar-label">Dynamic promo</span><div class="bar-track"><div class="bar-fill" data-w="68"></div></div><span class="bar-value">+2.1%</span></div>
+              <div class="bar-row"><span class="bar-label">Full optimization</span><div class="bar-track"><div class="bar-fill" data-w="95"></div></div><span class="bar-value">+3.8%</span></div>
+            </div>
+            <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.07);font-size:11px;color:rgba(255,255,255,.28);line-height:1.5">Recommended: <span style="color:var(--lime);font-weight:700">Full optimization</span>: projected +3.8% gross profit lift across 1,400 locations. Confidence: 94%.</div>
+            <div class="stat-grid"><div class="stat-cell"><div class="stat-n">30+</div><div class="stat-d">scenarios per decision</div></div><div class="stat-cell"><div class="stat-n">+2.1%</div><div class="stat-d">gross profit lift</div></div></div>
+          </div>
+        </div>
+        <div class="prod-proof"><div><div class="prod-proof-n">250&ndash;450bps</div><div class="prod-proof-d">incremental bottom-line revenue</div></div></div>
+        <a class="prod-link" href="#cases">See the case <svg viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
+      </div>
+    </div>
+
+    <!-- Panel 2: Segmentation -->
+    <div class="prod-panel" data-panel="2">
+      <div style="width:100%">
+        <div class="dash">
+          <div class="dash-bar"><div class="dash-dots"><span></span><span></span><span></span></div><div class="dash-title">Customer Segmentation &middot; US Retail</div><div class="dash-live"><span class="live-dot"></span>Live</div></div>
+          <div class="dash-body">
+            <div style="margin-bottom:14px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.28)">Segment headroom: 51M customers</div>
+            <div id="segChart">
+              <div class="bar-row"><span class="bar-label">VIP Loyalists</span><div class="bar-track"><div class="bar-fill" data-w="90"></div></div><span class="bar-value">$640M</span></div>
+              <div class="bar-row"><span class="bar-label">High-potential</span><div class="bar-track"><div class="bar-fill" data-w="52"></div></div><span class="bar-value" style="color:rgba(255,255,255,.45)">$210M</span></div>
+              <div class="bar-row"><span class="bar-label">Lapsed</span><div class="bar-track"><div class="bar-fill" data-w="28"></div></div><span class="bar-value" style="color:rgba(255,255,255,.45)">$95M</span></div>
+              <div class="bar-row"><span class="bar-label">Emerging</span><div class="bar-track"><div class="bar-fill" data-w="16"></div></div><span class="bar-value" style="color:rgba(255,255,255,.45)">$42M</span></div>
+            </div>
+            <div class="stat-grid">
+              <div class="stat-cell"><div class="stat-n">7</div><div class="stat-d">segments generated</div></div>
+              <div class="stat-cell"><div class="stat-n">50+</div><div class="stat-d">initiatives identified</div></div>
+              <div class="stat-cell"><div class="stat-n">CDP</div><div class="stat-d">auto-activation</div></div>
+              <div class="stat-cell"><div class="stat-n">51M</div><div class="stat-d">customer records</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="prod-proof"><div><div class="prod-proof-n">$640M+</div><div class="prod-proof-d">incremental growth identified</div></div><div><div class="prod-proof-n">50+</div><div class="prod-proof-d">initiatives from one engagement</div></div></div>
+        <a class="prod-link" href="#cases">See the case <svg viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
+      </div>
+    </div>
+
+    <!-- Panel 3: Inventory & Labor -->
+    <div class="prod-panel" data-panel="3">
+      <div style="width:100%">
+        <div class="dash">
+          <div class="dash-bar"><div class="dash-dots"><span></span><span></span><span></span></div><div class="dash-title">Inventory &amp; Labor Sync &middot; Convenience Network</div><div class="dash-live"><span class="live-dot"></span>Live</div></div>
+          <div class="dash-body">
+            <svg class="chart-svg" viewBox="0 0 480 120" style="margin-bottom:14px">
+              <defs><linearGradient id="gi" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#86BC24" stop-opacity=".4"/><stop offset="100%" stop-color="#86BC24" stop-opacity="0"/></linearGradient></defs>
+              <line x1="0" y1="30" x2="480" y2="30" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+              <line x1="0" y1="60" x2="480" y2="60" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+              <line x1="0" y1="90" x2="480" y2="90" stroke="rgba(255,255,255,.04)" stroke-width="1"/>
+              <path d="M0,25 L60,28 L120,22 L180,32 L240,18 L300,30 L360,20 L420,26 L480,22" stroke="rgba(255,255,255,.14)" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+              <path id="inv-fill" d="" fill="url(#gi)" opacity=".2"/>
+              <path id="inv-line" d="" stroke="#86BC24" stroke-width="2.2" fill="none"/>
+              <text x="4" y="114" fill="rgba(255,255,255,.18)" font-size="8.5" font-family="DM Sans">Before</text>
+              <text x="310" y="114" fill="rgba(134,188,36,.55)" font-size="8.5" font-family="DM Sans" font-weight="700">After optimization</text>
+            </svg>
+            <div class="stat-grid"><div class="stat-cell"><div class="stat-n">&darr;18%</div><div class="stat-d">overstock reduction</div></div><div class="stat-cell"><div class="stat-n">&darr;23%</div><div class="stat-d">stockout rate</div></div><div class="stat-cell"><div class="stat-n">Real-time</div><div class="stat-d">demand-supply sync</div></div><div class="stat-cell"><div class="stat-n">Weeks</div><div class="stat-d">to production</div></div></div>
+          </div>
+        </div>
+        <div class="prod-proof"><div><div class="prod-proof-n">&darr;18%</div><div class="prod-proof-d">overstock reduction</div></div><div><div class="prod-proof-n">Weeks</div><div class="prod-proof-d">to production</div></div></div>
+        <a class="prod-link" href="#cases">See the case <svg viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
+      </div>
+    </div>
+
+    <!-- Panel 4: Opportunities & Risks -->
+    <div class="prod-panel" data-panel="4">
+      <div style="width:100%">
+        <div class="dash">
+          <div class="dash-bar"><div class="dash-dots"><span></span><span></span><span></span></div><div class="dash-title">Opportunities &amp; Risks &middot; Retail</div></div>
+          <div class="dash-body">
+            <div style="display:flex;flex-direction:column;gap:8px;padding:4px 0">
+              <div style="background:rgba(134,188,36,.07);border:1px solid rgba(134,188,36,.2);border-radius:10px;padding:12px 14px;display:flex;gap:12px">
+                <div style="color:var(--lime);font-size:16px;flex-shrink:0">&uarr;</div>
+                <div><div style="font-size:11.5px;font-weight:700;color:rgba(255,255,255,.88);margin-bottom:3px">Tailwind: Consumer confidence up 4.2pts</div><div style="font-size:11px;color:rgba(255,255,255,.4);line-height:1.5">Discretionary spend index rising in 8 of 12 target markets. Recommended: accelerate Q2 promo investment.</div></div>
+              </div>
+              <div style="background:rgba(255,80,80,.05);border:1px solid rgba(255,80,80,.15);border-radius:10px;padding:12px 14px;display:flex;gap:12px">
+                <div style="color:#f87171;font-size:16px;flex-shrink:0">&darr;</div>
+                <div><div style="font-size:11.5px;font-weight:700;color:rgba(255,255,255,.88);margin-bottom:3px">Headwind: Supply chain disruption signal rising</div><div style="font-size:11px;color:rgba(255,255,255,.4);line-height:1.5">Lead-time risk detected in 3 key categories. 14-day forward visibility suggests pre-buy opportunity.</div></div>
+              </div>
+              <div style="background:transparent;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 14px;display:flex;gap:12px">
+                <div style="color:rgba(255,255,255,.35);font-size:16px;flex-shrink:0">&rarr;</div>
+                <div><div style="font-size:11.5px;font-weight:700;color:rgba(255,255,255,.88);margin-bottom:3px">Neutral: Competitor pricing stable this quarter</div><div style="font-size:11px;color:rgba(255,255,255,.4);line-height:1.5">No material pricing moves from primary competitors in 30-day window.</div></div>
+              </div>
+            </div>
+            <div class="stat-grid"><div class="stat-cell"><div class="stat-n">1M+</div><div class="stat-d">data features monitored</div></div><div class="stat-cell"><div class="stat-n">Daily</div><div class="stat-d">signal refresh</div></div></div>
+          </div>
+        </div>
+        <div class="prod-proof"><div><div class="prod-proof-n">1M+</div><div class="prod-proof-d">curated data features</div></div><div><div class="prod-proof-n">Daily</div><div class="prod-proof-d">automated signal refresh</div></div></div>
+        <a class="prod-link" href="#cases">See the case <svg viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-sec">
+  <div class="testi-head rv">
+    <div class="section-label" style="color:rgba(255,255,255,.3);margin-bottom:12px">The results speak for themselves</div>
+    <h2 class="testi-h">What clients say.</h2>
+    <p class="testi-note">Illustrative placeholders. Final quotes pending client approval.</p>
+  </div>
+  <div class="testi-scroll"><div class="testi-track" id="testiTrack"></div></div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="ind-sec" id="industries">
+<div class="wrap"><div class="ind-layout">
+  <div class="rv">
+    <div class="section-label">By industry &amp; role</div>
+    <h2 style="font-family:var(--serif);font-size:clamp(30px,3.8vw,50px);line-height:1.06;letter-spacing:-.022em;margin-bottom:28px">Find what's most<br/>relevant to you.</h2>
+    <div class="ind-group-label">Industry</div><div class="ind-chips" id="indChips"></div>
+    <div class="ind-divider"></div>
+    <div class="ind-group-label">Role</div><div class="ind-chips" id="roleChips"></div>
+  </div>
+  <div class="rv rv-d1" id="indReco"></div>
+</div></div>
+</section>
+
+<!-- CASES -->
+<section class="cases-sec" id="cases">
+<div class="wrap">
+  <div class="rv">
+    <div class="section-label">Cases</div>
+    <h2 style="font-family:var(--serif);font-size:clamp(30px,3.8vw,52px);line-height:1.06;letter-spacing:-.022em">ConvergeCONSUMER<br/>in practice.</h2>
+    <p style="font-size:15px;font-weight:300;color:var(--ink2);margin-top:12px;max-width:46ch;line-height:1.7">Every outcome tied to the specific operational decision that produced it.</p>
+  </div>
+  <div class="cases-wrap rv rv-d1">
+    <table>
+      <thead><tr><th>Product</th><th>Decision being made</th><th>Verified outcome</th><th>Sector</th></tr></thead>
+      <tbody>
+        <tr><td class="td-prod">Forecasting</td><td>What will demand be across time horizons?</td><td><span class="td-check">&#10003;</span>81&ndash;93% accuracy &nbsp;<span class="td-tag">+17% vs benchmark</span></td><td>Apparel</td></tr>
+        <tr><td class="td-prod">Forecasting</td><td>How do we build forecasts planners will act on?</td><td><span class="td-check">&#10003;</span>22% accuracy improvement<br/><span class="td-check">&#10003;</span>75% alignment time reduction<br/><span class="td-check">&#10003;</span>81% planner adoption</td><td>Consumer Products</td></tr>
+        <tr><td class="td-prod">Price &amp; Promo</td><td>Lower price perception without hurting margin?</td><td><span class="td-check">&#10003;</span>+1.3% net sales &nbsp;<span class="td-tag">+2.1% gross profit</span></td><td>Retail Pharmacy</td></tr>
+        <tr><td class="td-prod">Price &amp; Promo</td><td>Localized pricing at scale across franchisees?</td><td><span class="td-check">&#10003;</span>250&ndash;450bps incremental revenue<br/><span class="td-check">&#10003;</span>30+ scenarios per decision</td><td>Restaurants</td></tr>
+        <tr><td class="td-prod">Segmentation</td><td>How do we grow high-value customer engagement?</td><td><span class="td-check">&#10003;</span>$640M+ growth identified &nbsp;<span class="td-tag">50+ initiatives</span></td><td>US Retail</td></tr>
+        <tr><td class="td-prod">Segmentation</td><td>Who are our customers and how do we convert?</td><td><span class="td-check">&#10003;</span>$4.9M from 5% conversion<br/><span class="td-check">&#10003;</span>7 segments &middot; 51M customers</td><td>QSR</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec" id="cta">
+<div class="cta-glow"></div>
+<div class="wrap cta-inner">
+  <div class="rv">
+    <h2 class="cta-h">Which decisions<br/>are we solving<br/><em>first?</em></h2>
+    <p class="cta-p">Pick your next step based on where you are right now.</p>
+    <div class="cta-btns"><a class="btn-primary" href="#guide">Ask the Converge Guide</a><a class="btn-ghost" href="#products">Explore all products</a></div>
+  </div>
+  <div class="cta-cards rv rv-d2">
+    <div class="cta-card"><div class="cta-card-num">01</div><div class="cta-card-h">Learn</div><div class="cta-card-p">Download the one-pager for stakeholders who need context before a conversation.</div><span class="cta-card-link">Download overview &#8594;</span></div>
+    <div class="cta-card"><div class="cta-card-num">02</div><div class="cta-card-h">Evaluate</div><div class="cta-card-p">Request a product walkthrough for teams building the business case.</div><span class="cta-card-link">Request a walkthrough &#8594;</span></div>
+    <div class="cta-card"><div class="cta-card-num">03</div><div class="cta-card-h">Engage</div><div class="cta-card-p">Talk to our team to scope a deployment. Most clients are in production within weeks.</div><span class="cta-card-link">Talk to our team &#8594;</span></div>
+  </div>
+</div>
+</section>
+
+<!-- TRUST -->
+<section class="trust-sec">
+<div class="wrap">
+  <div class="trust-label">Built and governed to Deloitte standards</div>
+  <div class="trust-row">
+    <div class="trust-primary">
+      <span class="trust-badge-lg">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L4 6v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V6l-8-4z" stroke="var(--lime)" stroke-width="1.5"/></svg>
+        Deloitte Risk &amp; Governance Framework
+      </span>
+      <span class="trust-badge-lg">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" stroke="var(--lime)" stroke-width="1.5"/></svg>
+        Google Cloud &middot; Vertex AI &middot; BigQuery &middot; Cortex
+      </span>
+    </div>
+    <div class="trust-secondary">
+      <span class="trust-badge">SOC 2 Type II</span>
+      <span class="trust-badge">ISO 27001</span>
+      <span class="trust-badge">ISO 42001 AI</span>
+      <span class="trust-badge">GDPR Compliant</span>
+      <span class="trust-badge">HIPAA Ready</span>
+      <span class="trust-badge">EU AI Act</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<footer>
+<div class="wrap"><div class="footer-i">
+  <div class="foot-brand">ConvergeCONSUMER &middot; Part of Deloitte's Converge platform</div>
+  <div class="foot-links">
+    <a class="foot-link" href="#">ConvergeHEALTH</a>
+    <a class="foot-link" href="#">ConvergeFINANCIAL</a>
+    <button class="foot-link" onclick="window.print()">Print / PDF</button>
+  </div>
+</div></div>
+</footer>
+
+<script>
+/* NAV */
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>20),{passive:true});
+
+/* HERO CANVAS */
+(function(){
+  const c=document.getElementById('heroCanvas');if(!c)return;
+  const ctx=c.getContext('2d');let W,H;
+  const resize=()=>{W=c.width=c.offsetWidth;H=c.height=c.offsetHeight};
+  resize();window.addEventListener('resize',resize,{passive:true});
+  const pts=Array.from({length:90},()=>({x:Math.random()*2000,y:Math.random()*1200,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.18+.06,r:Math.random()*2+.4,a:Math.random()*.5+.1}));
+  let tick=0;
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    ctx.strokeStyle='rgba(134,188,36,0.035)';ctx.lineWidth=1;
+    for(let x=0;x<=W;x+=90){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
+    for(let y=0;y<=H;y+=90){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+    const n=10,bw=W/n,ph=tick*.007;
+    for(let i=0;i<n;i++){const h=(Math.sin(ph+i*.6)*.5+.5)*H*.3+H*.04;ctx.fillStyle=`rgba(134,188,36,${.022+.012*(Math.sin(ph+i*.5)*.5+.5)})`;ctx.fillRect(i*bw+bw*.1,H-h,bw*.8,h)}
+    [[H*.38,.32,0],[H*.55,.45,2]].forEach(([yb,f,p])=>{
+      ctx.beginPath();
+      for(let i=0;i<=10;i++){const x=(i/10)*W,y=yb+Math.sin(tick*.02*f+i*.7+p)*H*.06;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)}
+      ctx.strokeStyle='rgba(134,188,36,0.09)';ctx.lineWidth=1.5;ctx.stroke();
+    });
+    pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y>H)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(134,188,36,${p.a})`;ctx.fill()});
+    tick++;requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+/* HERO ENTRANCE */
+(function(){
+  const E=document.getElementById('heroEyebrow'),S=document.getElementById('heroSub'),C=document.getElementById('heroCtas'),St=document.getElementById('heroStrip');
+  setTimeout(()=>{
+    if(E){E.style.opacity='1';E.style.transform='none'}
+    document.querySelectorAll('.hero-h .word').forEach(w=>w.classList.add('in'));
+    setTimeout(()=>S&&S.classList.add('in'),300);
+    setTimeout(()=>C&&C.classList.add('in'),500);
+    setTimeout(()=>{if(St)St.style.opacity='1'},800);
+  },180);
+})();
+
+/* REVEAL */
+const rvObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rvObs.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>rvObs.observe(el));
+
+/* COUNTER ANIMATION */
+function animCount(el){
+  const target=parseInt(el.dataset.count)||0,pre=el.dataset.prefix||'',suf=el.dataset.suffix||'';
+  let cur=0;const dur=1200,start=Date.now();
+  (function step(){const prog=Math.min((Date.now()-start)/dur,1),ease=1-Math.pow(1-prog,3);cur=Math.round(ease*target);el.textContent=pre+cur+suf;if(prog<1)requestAnimationFrame(step)})();
+}
+const cntObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('[data-count]').forEach(animCount);cntObs.unobserve(e.target)}}),{threshold:.4});
+document.querySelectorAll('.hero-proof-grid,.stat-grid').forEach(el=>cntObs.observe(el));
+
+/* BAR ANIMATION */
+const barObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.bar-fill').forEach(b=>{setTimeout(()=>{b.style.width=(b.dataset.w||'0')+'%'},200)});barObs.unobserve(e.target)}}),{threshold:.3});
+document.querySelectorAll('#priceChart,#segChart').forEach(el=>barObs.observe(el));
+
+/* FORECAST SVG DRAW-ON */
+(function(){
+  const dash=document.getElementById('dashForecast');if(!dash)return;
+  let fired=false;
+  const obs=new IntersectionObserver(es=>{if(es[0].isIntersecting&&!fired){fired=true;obs.disconnect();
+    const AP=[[0,95],[48,88],[96,78],[144,72],[192,65],[240,58],[288,62],[316,54]];
+    const PP=[[316,54],[352,49],[400,46],[448,42],[480,38]];
+    const BT=[[316,44],[352,39],[400,36],[448,32],[480,28]];
+    const BB=[[480,48],[448,52],[400,56],[352,59],[316,64]];
+    function d2(pts){return pts.map((p,i)=>(i===0?`M${p[0]},${p[1]}`:`L${p[0]},${p[1]}`)).join(' ')}
+    const fl=document.getElementById('f-line'),ff=document.getElementById('f-fill'),fp=document.getElementById('f-pred'),fb=document.getElementById('f-band');
+    if(fl){fl.setAttribute('d',d2(AP));ff.setAttribute('d',d2(AP)+` L316,120 L0,120 Z`);const len=fl.getTotalLength();fl.style.strokeDasharray=len;fl.style.strokeDashoffset=len;fl.style.transition='stroke-dashoffset 1.6s cubic-bezier(.16,1,.3,1)';setTimeout(()=>{fl.style.strokeDashoffset=0},80)}
+    if(fp){fp.setAttribute('d',d2(PP));fb.setAttribute('d',d2(BT)+' '+d2(BB)+' Z');setTimeout(()=>{fp.style.transition='opacity .8s';fp.style.opacity=1;fb.style.transition='opacity .8s';fb.style.opacity=1},1700)}
+    const il=document.getElementById('inv-line'),ifl=document.getElementById('inv-fill');
+    const IP=[[0,60],[60,58],[120,54],[180,58],[240,50],[300,52],[360,46],[420,50],[480,44]];
+    if(il){il.setAttribute('d',d2(IP));ifl.setAttribute('d',d2(IP)+` L480,120 L0,120 Z`)}
+  }},{threshold:.3});
+  obs.observe(dash);
+})();
+
+/* STICKY PRODUCT NAV */
+(function(){
+  const panels=document.querySelectorAll('.prod-panel');
+  const navs=document.querySelectorAll('.prod-nav-item');
+  if(!panels.length)return;
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>.4){
+    const i=e.target.dataset.panel;
+    navs.forEach(n=>n.classList.toggle('active',n.dataset.panel===i));
+    e.target.querySelectorAll('.bar-fill').forEach(b=>{b.style.width='0';setTimeout(()=>{b.style.width=(b.dataset.w||'0')+'%'},200)});
+    e.target.querySelectorAll('[data-count]').forEach(el=>{el.textContent=(el.dataset.prefix||'')+'0'+(el.dataset.suffix||'');animCount(el)});
+  }})},{threshold:.4});
+  panels.forEach(p=>obs.observe(p));
+  navs.forEach(item=>item.addEventListener('click',()=>{const p=document.querySelector(`.prod-panel[data-panel="${item.dataset.panel}"]`);if(p)p.scrollIntoView({behavior:'smooth',block:'center'})}));
+})();
+
+/* TESTIMONIALS */
+(function(){
+  const DATA=[
+    {q:"We needed a single number planners would trust. Now we have it, and it feeds every downstream decision automatically.",co:"Apparel \u00b7 Forecasting",who:"VP Supply Chain Planning, Global Apparel Brand",stat:"81\u201393% accuracy"},
+    {q:"Localized pricing at this scale, across every franchisee, was not possible before. Now it runs without manual intervention.",co:"Restaurants \u00b7 Price & Promo",who:"Chief Revenue Officer, Multinational Restaurant",stat:"250\u2013450bps incremental revenue"},
+    {q:"We identified $640M in growth from our existing customer base. We did not know it was there until the model surfaced it.",co:"US Retail \u00b7 Segmentation",who:"Chief Marketing Officer, US Mass Retailer",stat:"$640M+ identified"},
+    {q:"75% reduction in time to align planners. That is not an efficiency gain. It removes a fundamental blocker from our business.",co:"Consumer Products \u00b7 Forecasting",who:"SVP Demand Planning, Consumer Products Co.",stat:"75% alignment time reduction"},
+    {q:"We went from a weekend spreadsheet to a model that makes recommendations. The quality of conversation in the room completely changed.",co:"Grocery \u00b7 Forecasting",who:"VP Planning & Replenishment, National Grocer",stat:"In production within weeks"},
+    {q:"The segmentation found customers we did not know we had. Activation was automated into our CDP the same week.",co:"QSR \u00b7 Segmentation",who:"Chief Digital Officer, Quick Service Restaurant",stat:"$4.9M from 5% conversion"},
+  ];
+  const track=document.getElementById('testiTrack');if(!track)return;
+  function mk(d){const el=document.createElement('div');el.className='testi-card';el.innerHTML=`<span class="testi-open-quote">"</span><p class="testi-q">${d.q}</p><div class="testi-divider"></div><div class="testi-company">${d.co}</div><div class="testi-who">${d.who}</div>${d.stat?`<span class="testi-stat">${d.stat}</span>`:''}`; return el}
+  [...DATA,...DATA].forEach(d=>track.appendChild(mk(d)));
+  track.addEventListener('mouseenter',()=>track.style.animationPlayState='paused');
+  track.addEventListener('mouseleave',()=>track.style.animationPlayState='running');
+})();
+
+/* GUIDE */
+const GR={
+  grocery:`For grocery operators, ConvergeCONSUMER typically improves four core decisions:\n\n<strong>Pricing & promotions</strong>: localized decisions across every SKU and zone, evaluated against 30+ scenarios before commitment.\n\n<strong>Demand forecasting</strong>: a shared P&L forecast planners actually trust, feeding replenishment, labor, and ordering decisions automatically.\n\n<strong>Store segmentation</strong>: clustering stores by what actually drives decisions, enabling localized assortment and labor allocation.\n\n<strong>Inventory sync</strong>: real-time alignment between supply and demand signals to reduce overstock and stockouts simultaneously.`,
+  pricing:`Verified outcomes for Price & Promo Optimization:\n\n<strong>Multinational restaurant group:</strong> 250\u2013450bps incremental bottom-line revenue. Full franchisee network. 30+ scenarios before each decision. Runs continuously.\n\n<strong>Retail pharmacy:</strong> +1.3% net sales lift, +2.1% gross profit lift. Deployed across the store network in weeks.\n\nThe distinction: this is not one-time optimization. The model re-runs as conditions change, so pricing stays optimal continuously.`,
+  data:`Customer segmentation is powered by three data products working together:\n\n<strong>Signals</strong>: thousands of consumer-level behavioral features and predictions your first-party data does not have.\n\n<strong>Customer identity resolution</strong>: unifies fragmented identities across POS, e-commerce, loyalty, and CRM into persistent unified profiles.\n\n<strong>Customer identity enhancement</strong>: appends Signals data to your resolved records, giving each profile a richer behavioral and predictive layer.`,
+  internal:`Three fundamental differences:\n\n<strong>1. Operating logic is pre-encoded</strong>: Deloitte's sector-specific decision logic is already built in. You are configuring, not training from scratch.\n\n<strong>2. Governed deployment</strong>: delivered through a Deloitte engagement, meaning change management and adoption are part of the product.\n\n<strong>3. Time to value</strong>: clients are in production within weeks. Internal builds average 18\u201324 months and often produce tools planners bypass.`,
+  agentic:`In ConvergeCONSUMER, agentic AI means the decision products do not just surface recommendations. They simulate, pressure-test, and in some cases automate decisions.\n\n<strong>Simulation</strong>: Price optimization evaluates 30+ scenarios before surfacing a recommendation.\n\n<strong>Pressure-testing</strong>: Forecasting agents surface disagreements between planners and market signals before they become plan errors.\n\n<strong>Automation</strong>: Inventory agents can trigger replenishment workflows without human approval once thresholds are configured.`,
+  speed:`Most clients are making decisions, not just running pilots, within weeks of engagement start.\n\n<strong>Pre-encoded logic</strong> means you configure, not build. Your sector's operating logic is already in the product.\n\n<strong>Modular delivery</strong> means you start with one product and add others as adoption builds.\n\n<strong>Deloitte-governed deployment</strong> means change management and adoption are built in: the most common reason internal builds fail.`
+};
+function getR(q){const l=q.toLowerCase();if(l.includes('grocer')||l.includes('retail'))return GR.grocery;if(l.includes('pric')||l.includes('promo'))return GR.pricing;if(l.includes('data')||l.includes('segment')||l.includes('signal'))return GR.data;if(l.includes('build')||l.includes('internal'))return GR.internal;if(l.includes('agent')||l.includes('ai')||l.includes('auto'))return GR.agentic;if(l.includes('fast')||l.includes('week')||l.includes('prod')||l.includes('speed'))return GR.speed;return`ConvergeCONSUMER covers decisions across demand & supply, customer & employee, and board & operations. Try one of the prompts to see the Guide in action.`}
+function addM(cls,html){const chat=document.getElementById('guideChat');if(!chat)return null;const d=document.createElement('div');d.className=cls;d.innerHTML=html;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;return d}
+window.guideClick=function(btn){
+  document.querySelectorAll('.gp').forEach(b=>b.classList.remove('on'));btn.classList.add('on');
+  const q=btn.innerText.trim(),key=btn.dataset.q;
+  const chat=document.getElementById('guideChat');if(chat)chat.innerHTML='';
+  addM('msg-row right',`<div class="msg-bubble msg-user">${q}</div>`);
+  const t=addM('msg-row',`<div class="typing"><span></span><span></span><span></span></div>`);
+  setTimeout(()=>{t&&t.remove();addM('msg-row',`<div class="msg-bubble msg-agent">${(GR[key]||getR(q)).replace(/\n/g,'<br/>')}</div>`)},1500);
+};
+window.guideSend=function(){const i=document.getElementById('gcInput');if(!i)return;const q=i.value.trim();if(!q)return;addM('msg-row right',`<div class="msg-bubble msg-user">${q}</div>`);const t=addM('msg-row',`<div class="typing"><span></span><span></span><span></span></div>`);i.value='';setTimeout(()=>{t&&t.remove();addM('msg-row',`<div class="msg-bubble msg-agent">${getR(q).replace(/\n/g,'<br/>')}</div>`)},1500)};
+document.getElementById('gcInput')?.addEventListener('keydown',e=>{if(e.key==='Enter')guideSend()});
+setTimeout(()=>{const f=document.querySelector('.gp');if(f)guideClick(f)},1200);
+
+/* INDUSTRIES */
+(function(){
+  const INDS=['Grocery','Retail','CPG','Restaurants','Travel','Automotive'];
+  const ROLES=['CMO / GM','CIO / Data','Ops / Supply Chain'];
+  const MI={
+    'Grocery':['Forecasting','Price & Promo','Store Segmentation','Inventory & Labor','Opportunities & Risks'],
+    'Retail':['Customer Segmentation','Price & Promo','Product & Place','Forecasting','Inventory & Labor'],
+    'CPG':['Forecasting','Customer Segmentation','Opportunities & Risks','Inventory & Labor'],
+    'Restaurants':['Price & Promo','Customer Segmentation','Forecasting','Store Segmentation'],
+    'Travel':['Customer Segmentation','Forecasting','Price & Promo','Opportunities & Risks'],
+    'Automotive':['Forecasting','Opportunities & Risks','Price & Promo','Customer Segmentation']
+  };
+  const MR={
+    'CMO / GM':['Customer Segmentation','Store Segmentation','Opportunities & Risks','Price & Promo'],
+    'CIO / Data':['Opportunities & Risks','Forecasting','Customer Segmentation','Inventory & Labor'],
+    'Ops / Supply Chain':['Forecasting','Inventory & Labor','Product & Place','Opportunities & Risks']
+  };
+  const DP=['Signals','Customer Identity Resolution','Customer Identity Enhancement'];
+  const PROOF={
+    'Grocery':{n:'81\u201393%',d:'forecast accuracy, global apparel'},
+    'Retail':{n:'$640M+',d:'growth identified, US retail segmentation'},
+    'CPG':{n:'75%',d:'alignment time reduction, consumer products'},
+    'Restaurants':{n:'250\u2013450bps',d:'incremental revenue, multinational restaurant'},
+    'Travel':{n:'In weeks',d:'to production, modular deployment'},
+    'Automotive':{n:'30+',d:'scenarios per pricing decision'}
+  };
+  let sI='Grocery',sR='CMO / GM';
+  const iEl=document.getElementById('indChips'),rEl=document.getElementById('roleChips'),rcEl=document.getElementById('indReco');
+  function mk(label,grp,container){const b=document.createElement('button');b.className='ind-chip'+(label===(grp==='i'?sI:sR)?' on':'');b.textContent=label;b.onclick=()=>{if(grp==='i')sI=label;else sR=label;render()};container.appendChild(b)}
+  function render(){
+    [...(iEl?.children||[])].forEach(b=>b.classList.toggle('on',b.textContent===sI));
+    [...(rEl?.children||[])].forEach(b=>b.classList.toggle('on',b.textContent===sR));
+    const prods=[...(MI[sI]||[]),...(MR[sR]||[])].filter((v,i,a)=>a.indexOf(v)===i).slice(0,6);
+    const pf=PROOF[sI]||{n:'',d:''};
+    if(!rcEl)return;
+    rcEl.innerHTML=`<div class="ind-reco-label">Recommended for ${sI} \u00b7 ${sR}</div><div class="ind-rec-grid"><div class="ind-box"><div class="ind-box-h">Decision products</div><ul class="ind-list">${prods.map(p=>`<li>${p}</li>`).join('')}</ul></div><div class="ind-box"><div class="ind-box-h">Data products</div><ul class="ind-list">${DP.map(p=>`<li>${p}</li>`).join('')}</ul></div></div>${pf.n?`<div class="ind-proof-strip"><div class="ind-proof-item"><div class="ind-proof-n">${pf.n}</div><div class="ind-proof-d">${pf.d}</div></div></div>`:''}<a class="ind-rec-link" href="#guide">Ask the Guide about ${sI} <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>`;
+  }
+  INDS.forEach(i=>mk(i,'i',iEl));ROLES.forEach(r=>mk(r,'r',rEl));render();
+})();
+</script>
+</body>
+</html>
